@@ -61,4 +61,9 @@ This is a repository containing the source [R Markdown](http://rmarkdown.rstudio
 
     Place the cursor in each chunk and then use keyboard shortcut <kbd>&#8984;</kbd>+<kbd>&#8679;</kbd>+<kbd>Enter</kbd> (i.e., <kbd>Cmd/Ctrl</kbd>+<kbd>Shift</kbd>+<kbd>Enter</kbd>) to run the codes in the given chunk. Another way is to click the green arrow button (see the picture above).
 
+```{r sessinfo}
+devtools::session_info()
+```
+
+
 # References
