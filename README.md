@@ -37,7 +37,7 @@ How to run the codes in the R Notebook
 
 3.  Then, open the R Notebook file called `nusa_r_notebook.Rmd` by going to `File` &gt; `Open File ...` (or use <kbd>⌘</kbd>+<kbd>O</kbd> on macOS or <kbd>Ctrl</kbd>+<kbd>O</kbd> on Windows), then select the given `.Rmd` file.
 
-4.  The codes can be run/executed all at once (i) using keyboard shortcut <kbd>⌥</kbd>+<kbd>⌘</kbd>+<kbd>R</kbd> on macOS (i.e., <kbd>Option</kbd>+<kbd>Cmd</kbd>+<kbd>Enter</kbd>) or <kbd>Alt</kbd>+<kbd>Ctrl</kbd>+<kbd>R</kbd> on Windows, (ii) or by navigating to the drop-down `Run` button and select `Run All` as shown below.
+4.  The codes can be run/executed all at once (i) using keyboard shortcut <kbd>⌥</kbd>+<kbd>⌘</kbd>+<kbd>R</kbd> on macOS (i.e., <kbd>Option</kbd>+<kbd>Cmd</kbd>+<kbd>R</kbd>) or <kbd>Alt</kbd>+<kbd>Ctrl</kbd>+<kbd>R</kbd> on Windows, (ii) or by navigating to the drop-down `Run` button and select `Run All` as shown below.
 
     ![Running the notebook](gh_tuts_2_run_notebook.png)
 
