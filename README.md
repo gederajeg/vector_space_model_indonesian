@@ -1,17 +1,26 @@
-Vector space models and the Indonesian denominal verbs
+Vector space models and the usage patterns of Indonesian denominal verbs
 ================
-Gede Primahadi Wijaya Rajeg<sup><a itemprop="sameAs" content="https://orcid.org/0000-0002-2047-8621" href="https://orcid.org/0000-0002-2047-8621" target="orcid.widget" rel="noopener noreferrer" style="vertical-align:top;"><img src="https://orcid.org/sites/default/files/images/orcid_16x16.png" style="width:1em;margin-right:.5em;" alt="ORCID iD icon"></a></sup>, Karlina Denistia, Simon Musgrave
+[Gede Primahadi Wijaya Rajeg](https://figshare.com/authors/Gede_Primahadi_Wijaya_Rajeg/1234749) <a itemprop="sameAs" content="https://orcid.org/0000-0002-2047-8621" href="https://orcid.org/0000-0002-2047-8621" target="orcid.widget" rel="noopener noreferrer" style="vertical-align:top;"><img src="https://orcid.org/sites/default/files/images/orcid_16x16.png" style="width:1em;margin-right:.5em;" alt="ORCID iD icon"></a>, [Karlina Denistia](http://uni-tuebingen.academia.edu/karlinadenistia) <a itemprop="sameAs" content="http://orcid.org/0000-0002-1060-3548" href="http://orcid.org/0000-0002-1060-3548" target="orcid.widget" rel="noopener noreferrer" style="vertical-align:top;"><img src="https://orcid.org/sites/default/files/images/orcid_16x16.png" style="width:1em;margin-right:.5em;" alt="ORCID iD icon"></a>, [Simon Musgrave](http://profiles.arts.monash.edu.au/simon-musgrave/) <a itemprop="sameAs" content="https://orcid.org/0000-0003-3237-9943" href="https://orcid.org/0000-0003-3237-9943" target="orcid.widget" rel="noopener noreferrer" style="vertical-align:top;"><img src="https://orcid.org/sites/default/files/images/orcid_16x16.png" style="width:1em;margin-right:.5em;" alt="ORCID iD icon"></a>
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by-nc-sa/4.0/88x31.png" /></a><br />This work is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/">Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License</a>.
 
-This is a repository containing the source [R Markdown](http://rmarkdown.rstudio.com) [Notebook](https://bookdown.org/yihui/rmarkdown/notebook.html) for the statistical analyses accompanying our paper on vector space models and Indonesian denominal verbs (in preparation for a special issue in [*NUSA*](http://www.aa.tufs.ac.jp/en/publications/nusa) titled [*Linguistic studies using large annotated corpora*](https://malindo.aa-ken.jp/call67.html), edited by [Hiroki Nomoto](http://www.tufs.ac.jp/ts/personal/nomoto/) and [David Moeljadi](http://compling.hss.ntu.edu.sg/who/david/)). The Notebook, however, does not provide detailed exposition and discussion for each points. Readers are referred to our paper for details. The following R packages have to be installed and loaded to run all codes in this Notebook:
+This is a repository containing the source [R Markdown](http://rmarkdown.rstudio.com) [Notebook](https://bookdown.org/yihui/rmarkdown/notebook.html) for the statistical analyses accompanying our paper on vector space models and Indonesian denominal verbs (submitted for a special issue in [*NUSA*](http://www.aa.tufs.ac.jp/en/publications/nusa) titled [*Linguistic studies using large annotated corpora*](https://malindo.aa-ken.jp/call67.html), edited by [Hiroki Nomoto](http://www.tufs.ac.jp/ts/personal/nomoto/) and [David Moeljadi](http://compling.hss.ntu.edu.sg/who/david/)). The Notebook, however, does not provide detailed exposition and discussion for each points. Readers are referred to our paper for details. Our computational analyses in the R Notebook used the following [R](https://www.r-project.org) packages, which have to be installed in R to run all codes in the Notebook:
 
--   cluster (Maechler et al. [2018](#ref-maechler_cluster_2018))
--   tidyverse (Wickham & Grolemund [2017](#ref-wickham_r_2017))
--   dendextend (Galili [2015](#ref-galili_dendextend_2015))
--   wordVectors (Schmidt & Li [2017](#ref-schmidt_wordvectors_2017))
--   Rling (Levshina [2015](#ref-levshina_how_2015))
+-   [cluster](https://cran.r-project.org/web/packages/cluster/index.html) (version 2.0.7-1) (Maechler et al. [2018](#ref-maechler_cluster_2018))
+-   [tidyverse](https://www.tidyverse.org) (version 1.2.1) (Wickham & Grolemund [2017](#ref-wickham_r_2017)), the core of which includes:
+    -   [dplyr](https://dplyr.tidyverse.org) (version 0.7.8) (Wickham et al. [2018](#ref-wickham_dplyr_2018))
+    -   [ggplot2](https://ggplot2.tidyverse.org) (version 3.1.0) (Wickham [2016](#ref-wickham_ggplot2_2016))
+    -   [purrr](https://purrr.tidyverse.org) (version 0.3.0) (Henry & Wickham [2019](#ref-henry_purrr_2019))
+    -   [readr](https://readr.tidyverse.org) (version 1.3.1) (Wickham, Hester & Francois [2018](#ref-wickham_readr_2018))
+    -   [stringr](https://stringr.tidyverse.org) (version 1.3.1) (Wickham [2018](#ref-wickham_stringr_2018))
+    -   [tidyr](https://tidyr.tidyverse.org) (version 0.8.2) (Wickham & Henry [2018](#ref-wickham_tidyr_2018))
+    -   [tibble](https://tibble.tidyverse.org) (version 2.0.1) (Müller & Wickham [2019](#ref-muller_tibble_2019))
+-   [dendextend](https://cran.r-project.org/web/packages/dendextend/index.html) (version 1.8.0) (Galili [2015](#ref-galili_dendextend_2015))
+-   [wordVectors](https://github.com/bmschmidt/wordVectors) (version 2.0) (Schmidt & Li [2017](#ref-schmidt_wordvectors_2017))
+-   [Rling](https://benjamins.com/sites/z.195/content/package.html) (version 1.0) (Levshina [2015](#ref-levshina_how_2015))
+
+The analyses in the paper were conducted using R version 3.5.1 (2018-07-02) and [RStudio](https://www.rstudio.com) version 1.1.463 for macOS.
 
 How to download/clone the repository and the data
 =================================================
@@ -26,7 +35,9 @@ How to download/clone the repository and the data
 
 4.  Given the large size of the data for version control with Git, we store them separately on figshare (**ADD FIGSHARE DOI**). Visit that figshare repo and please read the information page before clicking the white button saying `"Download all"` (next to the dark pink `"Cite"` button) to download all the data.
 
-5.  The downloaded data will be stored in a folder named with numbers. Please rename the downloaded data folder into `data` and move this `data` folder inside the `vector_space_model_indonesian-master` folder.
+5.  Please rename the downloaded data folder into `data` and move this `data` folder inside the `vector_space_model_indonesian-master` folder so that the structure of the directory has to look like below:
+
+    ![Project directory](gh_tuts_4_project_directory.png)
 
 How to run the codes in the R Notebook
 ======================================
@@ -54,14 +65,14 @@ devtools::session_info()
 #> ─ Session info ──────────────────────────────────────────────────────────
 #>  setting  value                       
 #>  version  R version 3.5.1 (2018-07-02)
-#>  os       macOS  10.14.2              
+#>  os       macOS  10.14.3              
 #>  system   x86_64, darwin15.6.0        
 #>  ui       X11                         
 #>  language (EN)                        
 #>  collate  en_US.UTF-8                 
 #>  ctype    en_US.UTF-8                 
 #>  tz       Australia/Melbourne         
-#>  date     2019-02-07                  
+#>  date     2019-03-16                  
 #> 
 #> ─ Packages ──────────────────────────────────────────────────────────────
 #>  package     * version date       lib source        
@@ -108,10 +119,24 @@ References
 
 Galili, Tal. 2015. Dendextend: An R package for visualizing, adjusting, and comparing trees of hierarchical clustering. *Bioinformatics*. doi:[10.1093/bioinformatics/btv428](https://doi.org/10.1093/bioinformatics/btv428).
 
+Henry, Lionel & Hadley Wickham. 2019. *Purrr: Functional programming tools*. <https://CRAN.R-project.org/package=purrr>.
+
 Levshina, Natalia. 2015. *How to do Linguistics with R: Data exploration and statistical analysis*. John Benjamins Publishing Company.
 
 Maechler, Martin, Peter Rousseeuw, Anja Struyf, Mia Hubert & Kurt Hornik. 2018. *Cluster: Cluster Analysis Basics and Extensions*.
 
+Müller, Kirill & Hadley Wickham. 2019. *Tibble: Simple data frames*. <https://CRAN.R-project.org/package=tibble>.
+
 Schmidt, Ben & Jian Li. 2017. *wordVectors: Tools for creating and analyzing vector-space models of texts*. <http://github.com/bmschmidt/wordVectors>.
 
+Wickham, Hadley. 2016. *Ggplot2: Elegant graphics for data analysis*. Springer-Verlag New York. <http://ggplot2.org>.
+
+Wickham, Hadley. 2018. *Stringr: Simple, consistent wrappers for common string operations*. <https://CRAN.R-project.org/package=stringr>.
+
 Wickham, Hadley & Garrett Grolemund. 2017. *R for Data Science*. Canada: O’Reilly. <http://r4ds.had.co.nz/> (7 March, 2017).
+
+Wickham, Hadley & Lionel Henry. 2018. *Tidyr: Easily tidy data with ’spread()’ and ’gather()’ functions*. <https://CRAN.R-project.org/package=tidyr>.
+
+Wickham, Hadley, Romain François, Lionel Henry & Kirill Müller. 2018. *Dplyr: A grammar of data manipulation*. <https://CRAN.R-project.org/package=dplyr>.
+
+Wickham, Hadley, Jim Hester & Romain Francois. 2018. *Readr: Read rectangular text data*. <https://CRAN.R-project.org/package=readr>.
