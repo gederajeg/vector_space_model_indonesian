@@ -33,7 +33,7 @@ bibliography: index_ref.bib
 
 # Preface
 
-```{r setup, include = FALSE}
+```{r setup, message = FALSE}
 # global option chunck
 knitr::opts_chunk$set(fig.width = 7, 
                       fig.asp = 0.618,
@@ -47,7 +47,9 @@ knitr::opts_chunk$set(fig.width = 7,
 ```
 
 
-This is an [R Markdown](http://rmarkdown.rstudio.com) [Notebook](https://bookdown.org/yihui/rmarkdown/notebook.html) for the statistical analyses accompanying our paper on vector space models and Indonesian denominal verbs (under review for a special issue in [*NUSA*](http://www.aa.tufs.ac.jp/en/publications/nusa) titled [*Linguistic studies using large annotated corpora*](https://malindo.aa-ken.jp/call67.html), edited by [Hiroki Nomoto](http://www.tufs.ac.jp/ts/personal/nomoto/) and [David Moeljadi](http://compling.hss.ntu.edu.sg/who/david/)). The Notebook, however, does not provide detailed exposition and discussion for each points, including English glossing of the Indonesian words in the tables. Readers are referred to our paper for details. The following R packages have to be installed and loaded to run all codes in this Notebook:
+This is an [R Markdown](http://rmarkdown.rstudio.com) [Notebook](https://bookdown.org/yihui/rmarkdown/notebook.html) for the statistical analyses accompanying our paper on vector space models and Indonesian denominal verbs (accepted for publication in [*NUSA*](http://www.aa.tufs.ac.jp/en/publications/nusa)'s special issue titled [*Linguistic studies using large annotated corpora*](https://malindo.aa-ken.jp/call67.html), edited by [Hiroki Nomoto](http://www.tufs.ac.jp/ts/personal/nomoto/) and [David Moeljadi](http://compling.hss.ntu.edu.sg/who/david/)). The Notebook, however, does not provide detailed exposition and discussion for each points, including English glossing of the Indonesian words in the tables. Readers are referred to our paper for details. Check the README page [here](https://github.com/gederajeg/vector_space_model_indonesian) for the tutorial to download this Notebook and the data for the paper.
+
+The following R packages have to be installed and loaded to run all codes in this Notebook:
 
 - cluster [@maechler_cluster_2018]
 - tidyverse [@wickham_r_2017]
