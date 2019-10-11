@@ -18,7 +18,7 @@ knitr::opts_chunk$set(
 
 <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by-nc-sa/4.0/88x31.png" /></a><br />This work is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/">Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License</a>.
 
-This is a repository containing the source [R Markdown](http://rmarkdown.rstudio.com) [Notebook](https://bookdown.org/yihui/rmarkdown/notebook.html) for the statistical analyses accompanying our paper on vector space models and Indonesian denominal verbs (submitted for a special issue in [*NUSA*](http://www.aa.tufs.ac.jp/en/publications/nusa) titled [*Linguistic studies using large annotated corpora*](https://malindo.aa-ken.jp/call67.html), edited by [Hiroki Nomoto](http://www.tufs.ac.jp/ts/personal/nomoto/) and [David Moeljadi](http://compling.hss.ntu.edu.sg/who/david/)). The Notebook, however, does not provide detailed exposition and discussion for each points. Readers are referred to our paper for details. Our computational analyses in the R Notebook used the following [R](https://www.r-project.org) packages, which have to be installed in R to run all codes in the Notebook:
+This is a repository containing the source [R Markdown](http://rmarkdown.rstudio.com) [Notebook](https://bookdown.org/yihui/rmarkdown/notebook.html) (i.e. `nusa_r_notebook.Rmd`) for the quantitative analyses accompanying our paper on vector space models and Indonesian denominal verbs (accepted for publication in [*NUSA*](http://www.aa.tufs.ac.jp/en/publications/nusa)'s special issue titled [*Linguistic studies using large annotated corpora*](https://malindo.aa-ken.jp/call67.html), edited by [Hiroki Nomoto](http://www.tufs.ac.jp/ts/personal/nomoto/) and [David Moeljadi](http://compling.hss.ntu.edu.sg/who/david/)). The Notebook, however, does not provide detailed exposition and discussion for each points. Also, there can be differences in some of the text-narratives in the Notebook compared to the published manuscript after revision. Readers are referred to our published paper for details. Our computational analyses in the R Notebook used the following [R](https://www.r-project.org) packages, which have to be installed in R to run all codes in the Notebook:
 
 - [cluster](https://cran.r-project.org/web/packages/cluster/index.html) (version 2.0.7-1) [@maechler_cluster_2018]
 - [tidyverse](https://www.tidyverse.org) (version 1.2.1) [@wickham_r_2017], the core of which includes:
@@ -34,7 +34,7 @@ This is a repository containing the source [R Markdown](http://rmarkdown.rstudio
 - [wordVectors](https://github.com/bmschmidt/wordVectors) (version 2.0) [@schmidt_wordvectors_2017]
 - [Rling](https://benjamins.com/sites/z.195/content/package.html) (version 1.0) [@levshina_how_2015]
 
-The analyses in the paper were conducted using R version 3.5.1 (2018-07-02) and [RStudio](https://www.rstudio.com) version 1.1.463 for macOS.
+The analyses in the paper were conducted using R version 3.6.0 (2019-04-26) and [RStudio](https://www.rstudio.com) version 1.2.1335 for macOS.
 
 # How to download/clone the repository and the data
 
@@ -46,7 +46,7 @@ The analyses in the paper were conducted using R version 3.5.1 (2018-07-02) and 
 
 3. The second step above will download the repo as a folder, by default called `vector_space_model_indonesian-master`. We suggest keep this folder's name. The folder consists of, among others, README files, .bib file, and the R Notebook containing the R codes for producing the analyses in the paper (incl. figures and tables).
 
-4. Given the large size of the data for version control with Git, we store them separately on figshare (**ADD FIGSHARE DOI**). Visit that figshare repo and please read the information page before clicking the white button saying `"Download all"` (next to the dark pink `"Cite"` button) to download all the data.
+4. Download the dataset from figshare (**ADD FIGSHARE DOI**). Please read the information page before clicking the white button saying `"Download all"` (next to the dark pink `"Cite"` button) to download all the data.
 
 5. Please rename the downloaded data folder into `data` and move this `data` folder inside the `vector_space_model_indonesian-master` folder so that the structure of the directory has to look like below:
 
