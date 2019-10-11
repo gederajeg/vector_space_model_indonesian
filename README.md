@@ -83,10 +83,11 @@ macOS.
     .bib file, and the R Notebook containing the R codes for producing
     the analyses in the paper (incl. figures and tables).
 
-4.  Download the dataset from figshare (**ADD FIGSHARE DOI**). Please
-    read the information page before clicking the white button saying
-    `"Download all"` (next to the dark pink `"Cite"` button) to download
-    all the data.
+4.  Download the dataset from figshare (**ADD FIGSHARE DOI**) (we store
+    them on figshare due to their large size for version control,
+    especially for the vector space model). Please read the information
+    page before clicking the white button saying `"Download all"` (next
+    to the dark pink `"Cite"` button) to download all the data.
 
 5.  Please rename the downloaded data folder into `data` and move this
     `data` folder inside the `vector_space_model_indonesian-master`
