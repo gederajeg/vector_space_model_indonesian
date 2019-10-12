@@ -86,7 +86,7 @@ macOS.
     the analyses in the paper (incl. figures and tables).
 
 4.  Download the dataset from
-    [figshare](https://doi.org/10.6084/m9.figshare.9970205) (we store
+    [figshare](https://doi.org/10.6084/m9.figshare.8187155) (we store
     them on figshare due to their large size for version control,
     especially for the vector space model). Please read the information
     page before clicking the white button saying `"Download all"` (next
@@ -155,7 +155,7 @@ devtools::session_info()
 #>  collate  en_US.UTF-8                 
 #>  ctype    en_US.UTF-8                 
 #>  tz       Asia/Makassar               
-#>  date     2019-10-11                  
+#>  date     2019-10-12                  
 #> 
 #> ─ Packages ──────────────────────────────────────────────────────────────
 #>  package     * version date       lib source        

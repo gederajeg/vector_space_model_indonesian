@@ -48,7 +48,7 @@ The analyses in the paper were conducted using R version 3.6.0 (2019-04-26) and 
 
 3. The second step above will download the repo as a folder, by default called `vector_space_model_indonesian-master`. We suggest keep this folder's name. The folder consists of, among others, README files, .bib file, and the R Notebook containing the R codes for producing the analyses in the paper (incl. figures and tables).
 
-4. Download the dataset from [figshare](https://doi.org/10.6084/m9.figshare.9970205) (we store them on figshare due to their large size for version control, especially for the vector space model). Please read the information page before clicking the white button saying `"Download all"` (next to the dark pink `"Cite"` button) to download all the data.
+4. Download the dataset from [figshare](https://doi.org/10.6084/m9.figshare.8187155) (we store them on figshare due to their large size for version control, especially for the vector space model). Please read the information page before clicking the white button saying `"Download all"` (next to the dark pink `"Cite"` button) to download all the data.
 
 5. Please rename the downloaded data folder into `data` and move this `data` folder inside the `vector_space_model_indonesian-master` folder so that the structure of the directory has to look like below:
 
