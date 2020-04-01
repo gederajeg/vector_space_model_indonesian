@@ -30,11 +30,13 @@ titled [*Linguistic studies using large annotated
 corpora*](http://repository.tufs.ac.jp/handle/10108/94450), edited by
 [Hiroki Nomoto](http://www.tufs.ac.jp/ts/personal/nomoto/) and [David
 Moeljadi](http://compling.hss.ntu.edu.sg/who/david/)) (Nomoto & Moeljadi
-[2019](#ref-nomoto_linguistic_2019)). The Notebook, however, does not
-provide detailed exposition and discussion for each points. Also, there
-can be differences in some of the text-narratives in the Notebook
-compared to the published manuscript after revision. Readers are
-referred to our published
+[2019](#ref-nomoto_linguistic_2019)). The R Notebook, which is deployed
+as a GitHub
+[webpage](https://gederajeg.github.io/vector_space_model_indonesian/),
+however, does not provide detailed exposition and discussion for each
+points. Also, there can be differences in some of the text-narratives in
+the Notebook compared to the published manuscript after revision.
+Readers are referred to our published
 [paper](http://repository.tufs.ac.jp/handle/10108/94452) for details.
 Our computational analyses in the R Notebook used the following
 [R](https://www.r-project.org) packages, which have to be installed in R
