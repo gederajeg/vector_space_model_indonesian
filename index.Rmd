@@ -1,0 +1,760 @@
+---
+title: R Markdown Notebook for *Vector Space Models and the usage patterns of Indonesian
+  denominal verbs*
+author: '[Gede Primahadi Wijaya Rajeg](https://figshare.com/authors/Gede_Primahadi_Wijaya_Rajeg/1234749) <a itemprop="sameAs" content="https://orcid.org/0000-0002-2047-8621" href="https://orcid.org/0000-0002-2047-8621" target="orcid.widget" rel="noopener noreferrer" style="vertical-align:top;"><img src="https://orcid.org/sites/default/files/images/orcid_16x16.png" style="width:1em;margin-right:.5em;" alt="ORCID iD icon"></a>, [Karlina Denistia](http://uni-tuebingen.academia.edu/karlinadenistia) <a itemprop="sameAs" content="http://orcid.org/0000-0002-1060-3548" href="http://orcid.org/0000-0002-1060-3548" target="orcid.widget" rel="noopener noreferrer" style="vertical-align:top;"><img src="https://orcid.org/sites/default/files/images/orcid_16x16.png" style="width:1em;margin-right:.5em;" alt="ORCID iD icon"></a>, [Simon Musgrave](http://profiles.arts.monash.edu.au/simon-musgrave/) <a itemprop="sameAs" content="https://orcid.org/0000-0003-3237-9943" href="https://orcid.org/0000-0003-3237-9943" target="orcid.widget" rel="noopener noreferrer" style="vertical-align:top;"><img src="https://orcid.org/sites/default/files/images/orcid_16x16.png" style="width:1em;margin-right:.5em;" alt="ORCID iD icon"></a>'
+date: "Created 26 January, 2019; Last Update `r format(Sys.time(), '%d %B, %Y')`"
+output:
+  html_notebook:
+    fig_caption: yes
+    fig_width: 6
+    theme: "united"
+    highlight: "pygments"
+    number_sections: yes
+    toc: yes
+    toc_float: yes
+  bookdown::html_document2:
+    toc: TRUE
+    toc_float: TRUE
+    theme: "united"
+    highlight: "pygments"
+    fig_caption: yes
+    fig_width: 6
+    number_sections: TRUE
+    code_folding: show
+    keep_md: FALSE
+link-citations: yes
+csl: unified_stylesheet_linguistics.csl
+bibliography: index_ref.bib
+---
+
+<a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by-nc-sa/4.0/88x31.png" /></a><br />This work is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/">Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License</a>.
+
+[![DOI](https://img.shields.io/badge/doi-10.6084/m9.figshare.9970205-blue.svg?style=flat&labelColor=whitesmoke&logo=data%3Aimage%2Fpng%3Bbase64%2CiVBORw0KGgoAAAANSUhEUgAAAB8AAAAfCAYAAAAfrhY5AAAJsklEQVR42qWXd1DTaRrHf%2BiB2Hdt5zhrAUKz4IKEYu9IGiGFFJJQ0gkJCAKiWFDWBRdFhCQUF3UVdeVcRQEBxUI3yY9iEnQHb3bdW1fPubnyz%2F11M7lvEHfOQee2ZOYzPyDv%2B3yf9%2Fk95YX4fx%2BltfUt08GcFEuPR4U9hDDZ%2FVngIlhb%2FSiI6InkTgLzgDcgfvtnovhH4BzoVlrbwr55QnhCtBW4QHXnFrZbPBaQoBh4%2FSYH2EnpBEtqcDMVzB93wA%2F8AFwa23XFGcc8CkT3mxz%2BfXWtq9T9IQlLIXYEuHojudb%2BCM7Hgdq8ydi%2FAHiBXyY%2BLjwFlAEnS6Jnar%2FvnQVhvdzasad0eKvWZKe8hvDB2ofLZ%2FZEcWsh%2BhyIuyO5Bxs2iZIE4nRv7NWAb0EO8AC%2FWPxjYAWuOEX2MSXZVgPxzmRL3xKz3ScGpx6p6QnOx4mDIFqO0w6Q4fEhO5IzwxlSwyD2FYHzwAW%2BAZ4fEsf74gCumykwNHskLM7taQxLYjjIyy8MUtraGhTWdkfhkFJqtvuVl%2F9l2ZquDfEyrH8B0W06nnpH3JtIyRGpH1iJ6SfxDIHjRXHJmdQjLpfHeN54gnfFx4W9QRnovx%2FN20aXZeTD2J84hn3%2BqoF2Tqr14VqTPUCIcP%2B5%2Fly4qC%2BUL3sYxSvNj1NwsVYPsWdMUfomsdkYm3Tj0nbV0N1wRKwFe1MgKACDIBdMAhPE%2FwicwNWxll8Ag40w%2BFfhibJkGHmutjYeQ8gVlaN%2BjO51nDysa9TwNUFMqaGbKdRJZFfOJSp6mkRKsv0rRIpEVWjAvyFkxNOEpwvcAVPfEe%2Bl8ojeNTx3nXLBcWRrYGxSRjDEk0VlpxYrbe1ZmaQ5xuT0u3r%2B2qe5j0J5uytiZPGsRL2Jm32AldpxPUNJ3jmmsN4x62z1cXrbedXBQf2yvIFCeZrtyicZZG2U2nrrBJzYorI2EXLrvTfCSB43s41PKEvbZDEfQby6L4JTj%2FfIwam%2B4%2BwucBu%2BDgNK05Nle1rSt9HvR%2FKPC4U6LTfvUIaip1mjIa8fPzykii23h2eanT57zQ7fsyYH5QjywwlooAUcAdOh5QumgTHx6aAO7%2FL52eaQNEShrxfhL6albEDmfhGflrsT4tps8gTHNOJbeDeBlt0WJWDHSgxs6cW6lQqyg1FpD5ZVDfhn1HYFF1y4Eiaqa18pQf3zzYMBhcanlBjYfgWNayAf%2FASOgklu8bmgD7hADrk4cRlOL7NSOewEcbqSmaivT33QuFdHXj5sdvjlN5yMDrAECmdgDWG2L8P%2BAKLs9ZLZ7dJda%2BB4Xl84t7QvnKfvpXJv9obz2KgK8dXyqISyV0sXGZ0U47hOA%2FAiigbEMECJxC9aoKp86re5O5prxOlHkcksutSQJzxZRlPZmrOKhsQBF5zEZKybUC0vVjG8PqOnhOq46qyDTDnj5gZBriWCk4DvXrudQnXQmnXblebhAC2cCB6zIbM4PYgGl0elPSgIf3iFEA21aLdHYLHUQuVkpgi02SxFdrG862Y8ymYGMvXDzUmiX8DS5vKZyZlGmsSgQqfLub5RyLNS4zfDiZc9Edzh%2FtCE%2BX8j9k%2FqWB071rcZyMImne1SLkL4GRw4UPHMV3jjwEYpPG5uW5fAEot0aTSJnsGAwHJi2nvF1Y5OIqWziVCQd5NT7t6Q8guOSpgS%2Fa1dSRn8JGGaCD3BPXDyQRG4Bqhu8XrgAp0yy8DMSvvyVXDgJcJTcr1wQ2BvFKf65jqhvmxXUuDpGBlRvV36XvGjQzLi8KAKT2lYOnmxQPGorURSV0NhyTIuIyqOmKTMhQ%2BieEsgOgpc4KBbfDM4B3SIgFljvfHF6cef7qpyLBXAiQcXvg5l3Iunp%2FWv4dH6qFziO%2BL9PbrimQ9RY6MQphEfGUpOmma7KkGzuS8sPUFnCtIYcKCaI9EXo4HlQLgGrBjbiK5EqMj2AKWt9QWcIFMtnVvQVDQV9lXJJqdPVtUQpbh6gCI2Ov1nvZts7yYdsnvRgxiWFOtNJcOMVLn1vgptVi6qrNiFOfEjHCDB3J%2BHDLqUB77YgQGwX%2Fb1eYna3hGKdlqJKIyiE4nSbV8VFgxmxR4b5mVkkeUhMgs5YTi4ja2XZ009xJRHdkfwMi%2BfocaancuO7h%2FMlcLOa0V%2FSw6Dq47CumRQAKhgbOP8t%2BMTjuxjJGhXCY6XpmDDFqWlVYbQ1aDJ5Cptdw4oLbf3Ck%2BdWkVP0LpH7s9XLPXI%2FQX8ws%2Bj2In63IcRvOOo%2BTTjiN%2BlssfRsanW%2B3REVKoavBOAPTXABW4AL7e4NygHdpAKBscmlDh9Jysp4wxbnUNna3L3xBvyE1jyrGIkUHaqQMuxhHElV6oj1picvgL1QEuS5PyZTEaivqh5vUCKJqOuIgPFGESns8kyFk7%2FDxyima3cYxi%2FYOQCj%2F%2B9Ms2Ll%2Bhn4FmKnl7JkGXQGDKDAz9rUGL1TIlBpuJr9Be2JjK6qPzyDg495UxXYF7JY1qKimw9jWjF0iV6DRIqE%2B%2FeWG0J2ofmZTk0mLYVd4GLiFCOoKR0Cg727tWq981InYynvCuKW43aXgEjofVbxIqrm0VL76zlH3gQzWP3R3Bv9oXxclrlO7VVtgBRpSP4hMFWJ8BrUSBCJXC07l40X4jWuvtc42ofNCxtlX2JH6bdeojXgTh5TxOBKEyY5wvBE%2BACh8BtOPNPkApjoxi5h%2B%2FFMQQNpWvZaMH7MKFu5Ax8HoCQdmGkJrtnOiLHwD3uS5y8%2F2xTSDrE%2F4PT1yqtt6vGe8ldMBVMEPd6KwqiYECHDlfbvzphcWP%2BJiZuL5swoWQYlS%2Br7Yu5mNUiGD2retxBi9fl6RDGn4Ti9B1oyYy%2BMP5G87D%2FCpRlvdnuy0PY6RC8BzTA40NXqckQ9TaOUDywkYsudxJzPgyDoAWn%2BB6nEFbaVxxC6UXjJiuDkW9TWq7uRBOJocky9iMfUhGpv%2FdQuVVIuGjYqACbXf8aa%2BPeYNIHZsM7l4s5gAQuUAzRUoT51hnH3EWofXf2vkD5HJJ33vwE%2FaEWp36GHr6GpMaH4AAPuqM5eabH%2FhfG9zcCz4nN6cPinuAw6IHwtvyB%2FdO1toZciBaPh25U0ducR2PI3Zl7mokyLWKkSnEDOg1x5fCsJE9EKhH7HwFNhWMGMS7%2BqxyYsbHHRUDUH4I%2FAheQY7wujJNnFUH4KdCju83riuQeHU9WEqNzjsJFuF%2FdTDAZ%2FK7%2F1WaAU%2BAWymT59pVMT4g2AxcwNa0XEBDdBDpAPvgDIH73R25teeuAF5ime2Ul0OUIiG4GpSAEJeYW9wDTf43wfwHgHLKJoPznkwAAAABJRU5ErkJggg%3D%3D)](http://dx.doi.org/10.6084/m9.figshare.9970205)
+
+# Preface
+
+```{r setup, message = FALSE}
+# global option chunck
+knitr::opts_chunk$set(fig.width = 7, 
+                      fig.asp = 0.618,
+                      dpi = 300,
+                      dev = "pdf",
+                      echo = TRUE,
+                      message = FALSE,
+                      warning = FALSE,
+                      fig.path = "figures/")
+```
+
+
+This is an [R Markdown](http://rmarkdown.rstudio.com) [Notebook](https://bookdown.org/yihui/rmarkdown/notebook.html) for the statistical analyses accompanying our [paper](http://repository.tufs.ac.jp/handle/10108/94452) [@rajeg_vector_2019] on vector space models and Indonesian denominal verbs (published in [*NUSA*](http://www.aa.tufs.ac.jp/en/publications/nusa)'s special issue titled [*Linguistic studies using large annotated corpora*](http://repository.tufs.ac.jp/handle/10108/94450), edited by [Hiroki Nomoto](http://www.tufs.ac.jp/ts/personal/nomoto/) and [David Moeljadi](http://compling.hss.ntu.edu.sg/who/david/)) [@nomoto_linguistic_2019]. The Notebook, however, does not provide detailed exposition and discussion for each points, including English glossing of the Indonesian words in the tables. Readers are referred to our [paper](http://repository.tufs.ac.jp/handle/10108/94452) for details. Check the README page [here](https://github.com/gederajeg/vector_space_model_indonesian) for the tutorial to download this Notebook and the data for the paper.
+
+The following R packages have to be installed and loaded to run all codes in this Notebook:
+
+- cluster [@maechler_cluster_2018]
+- tidyverse [@wickham_r_2017]
+- dendextend [@galili_dendextend_2015]
+- wordVectors [@schmidt_wordvectors_2017]
+- Rling [@levshina_how_2015]
+
+Click the `Code` button to hide/reveal the R codes.
+
+```{r utilised-packages, echo = TRUE}
+# load the required packages
+## make sure all packages are installed!
+library(cluster)
+library(tidyverse)
+library(dendextend)
+library(wordVectors) # should be installed from Ben Schmidt's GitHub
+library(Rling) # <- `Rling` package from Natalia Levshina's (2015) book 'How to do linguistics with R' published by John Benjamins.
+```
+
+
+# Illustration for generating Vector Space Models (VSM)
+
+For illustration, we used six deverbal nouns with the suffix -*an*. They are *bacaan* 'reading' (from the root *baca* 'to read'), *tulisan* 'writing' (from *tulis* 'to write'), *lukisan* 'painting' (from *lukis* 'to paint/draw'), *masakan* 'cooking' (from *masak* 'to cook'), *makanan* 'food' (from *makan* 'to eat'), and *minuman* 'beverages' (from *minum* 'to drink'). We retrieved collocates within three-word window to the either sides (left and right) of each noun. We used one of the _Indonesian_ [_Leipzig Corpora_](http://corpora2.informatik.uni-leipzig.de/download.html) files, namely *ind_mixed_2012_1M-sentences.txt* [see @biemann_leipzig_2007; @quasthoff_indonesian_2013].
+
+## Creating the co-occurrence frequency table
+
+The following codes process the retrieved collocates into co-occurrence frequency table and print a subset of this table. The collocates data is available in the `"vsm_creation_data.rds"` file. This `.rds` file contains a `List` data-structure; the table version is available as tab-delimited `.csv` and `.txt` files (`vsm_creation_data_tb.txt` & `vsm_creation_data_tb.csv`).
+
+```{r vsm-xmpl-collfreq}
+df_list <- readRDS(file = "data/vsm_creation_data.rds")
+df_ex <- purrr::map_df(df_list, dplyr::bind_rows); rm(df_list)
+df_ex1 <- dplyr::filter(df_ex, 
+                        !is.na(w), # remove NAs
+                        nchar(w) > 1, # remove one-character tokens
+                        stringr::str_detect(w, "^[a-z-]+$"),
+                        
+                        # remove incomplete words
+                        !stringr::str_detect(w, "^[a-z]+-$"), 
+                        
+                        # remove incomplete words
+                        !stringr::str_detect(w, "^-[a-z]+$")) 
+
+df_ex1_count <- dplyr::count(df_ex1, node, w, sort = TRUE)
+df_ex1_count_spread <- tidyr::spread(df_ex1_count, w, n, fill = 0)
+df_ex1_count_spread <- as.data.frame(df_ex1_count_spread)
+df_ex1_count_spread <- df_ex1_count_spread[, colSums(df_ex1_count_spread[, -1]) > 0]
+rownames(df_ex1_count_spread) <- df_ex1_count_spread$node
+df_ex1_count_spread <- df_ex1_count_spread[, -1]
+
+selected_column <- c("alkitab", 
+                     "dituangkan", "halal", "keras", 
+                     "mengandung", "penutup")
+df_ex1_print <- df_ex1_count_spread[, selected_column]
+rownames(df_ex1_print) <- paste("*", rownames(df_ex1_print), "*", sep = "")
+colnames(df_ex1_print) <- paste("*", colnames(df_ex1_print), "*", sep = "")
+df_ex1_print$`...` <- rep("...", nrow(df_ex1_print))
+knitr::kable(df_ex1_print, caption = "Raw co-occurrence frequency for the target words with the context words")
+```
+
+
+## Performing the *Positive Pointwise Mutual Information*
+
+Current approach in VSM adopts a more principled method of weighting the initial raw-frequency vectors into statistical measures of collocation strength before computing (dis)similarity measure between the target words. The goal of the weighting is "to give a higher weight to context words that co-occur significantly more often than expected by chance" [@heylen_monitoring_2015, 156; cf. @lappin_vector_2015, 503-504; @perek_recent_2016, 12]. These significantly associatied context words are assumed to be more informative for the semantics of the target words [@heylen_monitoring_2015, 156]. The popular weighting measure used in VSM is the *Pointwise Mutual Information* (PMI) [see @levshina_how_2015, 327-328 for computing PMI in R]:
+
+$$\text{PMI } (x, y) = log_{2} \frac {O_{xy}} {E_{xy}}$$
+
+where $O_{xy}$ represents the observed co-occurrence frequency between *x* and *y*, while $E_{xy}$ is their expected co-occurrence frequency, which is the frequency expected under the chance distribution between *x* and *y* given the overall distribution of *x* and *y* in the corpus. Negative PMI values is normally replaced with zero, resulting in the *Positive PMI* (PPMI) [@levshina_how_2015; @hilpert_meaning_2015].
+
+```{r vsm-xmpl-ppmi, warning = FALSE}
+mtx <- as.matrix(df_ex1_count_spread)
+mtx_exp <- chisq.test(mtx)$expected
+mtx_pmi <- log2(mtx/mtx_exp); rm(mtx)
+mtx_ppmi <- ifelse(mtx_pmi < 0, 0, mtx_pmi); rm(mtx_exp)
+ppmiprint <- as.data.frame(round(mtx_ppmi, digits = 2)); rm(mtx_pmi)
+ppmiprint <- ppmiprint[, selected_column]
+rownames(ppmiprint) <- paste("*", rownames(ppmiprint), "*", sep = "")
+colnames(ppmiprint) <- paste("*", colnames(ppmiprint), "*", sep = "")
+ppmiprint$`...` <- rep("...", nrow(df_ex1_count_spread))
+knitr::kable(ppmiprint, caption = "Weighted co-occurrence frequency with *Positive Pointwise Mutual Information*")
+```
+
+Further analysis can be performed. The most common one is determining the semantic (dis)similarity between the target words (i.e., which word is more similar and different among each other). The following section briefly discusses the *Cosine Similarity* and *Hierarchical Agglomerative Cluster* (HAC) analyses as the exploratory tools [@levshina_geographic_2014; @levshina_how_2015].
+
+## Exploring VSM with *Cosine Similarity* and *Hierarchical Agglomerative Cluster* (HAC) analysis
+
+In VSM, *cosine similarity* is the popular measure for computing pairwise (dis)similarity between the target words. Cosine similarity computes the cosine of angles between the words' vectors to capture their (dis)similarity. The cosine value between a pair of word is close to 1 when they are semantically more similar, and close to 0 when otherwise (see [\@ref(tab:vsm-xmpl-cossim)](#vsm-xmpl-cossim)) [@levshina_how_2015, Ch. 16]. 
+
+The following codes perform cosine similarity using the `cossim()` function from the Rling package [@levshina_how_2015, 329].
+
+```{r vsm-xmpl-cossim}
+# Cosine Similarity
+mtx_cossim <- Rling::cossim(mtx_ppmi); rm(mtx_ppmi)
+
+# Generate CosSim table output
+attr(mtx_cossim, "dimnames")[[1]] <- paste("*", 
+                                           attr(mtx_cossim, "dimnames")[[1]],
+                                           "*",
+                                           sep = "")
+attr(mtx_cossim, "dimnames")[[2]] <- paste("*", 
+                                           attr(mtx_cossim, "dimnames")[[2]],
+                                           "*",
+                                           sep = "")
+knitr::kable(round(mtx_cossim, digits = 2), 
+             caption = "Cosine similarity matrix between the deverbal nouns")
+```
+
+For the cluster analysis, such as HAC [@levshina_geographic_2014; see also @gries_statistics_2013, 336; @levshina_how_2015, Ch. 15; and @desagulier_corpus_2017, 276 for R implementations on HAC], the similarity matrix/table as above needs to be converted into distance matrix as input for the cluster analysis [see the codes below adapted from @levshina_how_2015, 330].
+
+```{r vsm-xmpl-hac}
+# Distance matrix computation
+mtx_dist <- 1 - (mtx_cossim/max(mtx_cossim[mtx_cossim != 1]))
+mtx_dist <- as.dist(mtx_dist)
+
+# Cluster analysis
+mtx_hcl <- hclust(mtx_dist, method = "ward.D2")
+```
+
+The output of HAC can be visualised into a dendrogram tree (see [Figure \@ref(fig:vsm-xmpl-dendrogram)](#vsm-xmpl-dendrogram)). To determine the optimal number of cluster solution for grouping the nouns, we used the *Average Silhouette Width* (ASW) scores and tested two up to five-cluster solutions. The two-cluster solution produces the highest ASW score. See the codes below. 
+
+```{r vsm-xmpl-dendrogram, fig.asp = 0.75, fig.cap = "VSM-based cluster dendrogram for the target words"}
+# ASW calculation
+mtx_asw <- sapply(2:(nrow(mtx_cossim) - 1), function(x) summary(cluster::silhouette(stats::cutree(mtx_hcl, k = x), mtx_dist))$avg.width)
+
+# names the ASW scores representing the tested cluster-solutions 
+names(mtx_asw) <- 2:(nrow(mtx_cossim) - 1)
+
+# identify the maximum ASW score
+max_asw <- as.numeric(names(mtx_asw[mtx_asw == max(mtx_asw)]))
+
+# plotting dendrogram
+mtx_hcl$labels <- gsub('\\*', '', mtx_hcl$labels)
+plot(mtx_hcl, hang = -1)
+rect.hclust(mtx_hcl, k = max_asw)
+
+# generate texts annotation within the plot
+added_info <- paste("The ", max_asw, "-cluster solution is based on the highest Average Silhouette Width (ASW) score of ", round(max(mtx_asw), 3), ".\n(ASW ranges from 0 to 1; min. ASW score for assuming substantial cluster is 0.2)", sep = "")
+mtext(added_info, side = 1, line = 1.75, cex = .8)
+```
+
+The following codes produce the plot visualising the number of cluster-solutions tested and their corresponding ASW scores.
+
+```{r vsm-xmpl-asw-plot, fig.asp = .75, fig.cap = "Average Silhouette Widths for the tested cluster solutions"}
+plot(x = 2:5, y = mtx_asw, 
+     type = "b", xaxt = "n", 
+     ylab = "Average Silhouette Widths (ASW)", 
+     ylim = c(0, 1),
+     xlab = "Number of tested cluster solutions")
+axis(side = 1, at = 2:5)
+text(2:5, 
+     mtx_asw, 
+     labels = round(mtx_asw, digits = 3), 
+     pos = 3, 
+     cex = .8)
+text(x = 3.25,
+     y = 0.2, 
+     labels = "The 2-cluster solution produces the highest ASW score")
+```
+
+
+# Methodology
+
+## Data source
+
+The paper uses thirteen corpus files from the Indonesian Leipzig Corpora to be trained into a vector space models. The following codes show how to load the data for the information of corpus size (i.e. `"wordcount_leipzig_allcorpus.RData"`) and to print them.
+
+```{r leipzig-corpus-size}
+# load the corpus size data
+load("data/wordcount_leipzig_allcorpus.RData")
+
+# print the table
+leipzig.word.count %>%
+  select(-Size) %>%
+  rename(`Size (in word-tokens)`= Size_print,
+         `Corpus files` = Corpus) %>%
+  as.data.frame() %>%
+  knitr::kable(row.names = TRUE, caption = "Indonesian Leipzig Corpora and their sizes")
+```
+
+In total, the thirteen corpus files amount to `r prettyNum(sum(leipzig.word.count$Size), big.mark = ",")` million word-tokens.
+
+## The studied denominal verbs
+
+The database for the studied verbs is available in the `.rds`, `.csv`, and `.txt` tab-delimited files named `"me_parsed_nountaggedbase"`. The verbs have been parsed and tagged using *MorphInd* [@larasati_indonesian_2011]. We limited the study on the verbs with noun-tagged roots that occur over 20 tokens. For each root, all the verb forms must occur in the three morphological schemas, namely *meN*-, *meN*-/-*kan*, and *meN*-/-*i*. For instance, we take _**men**dasar_ 'to be basic', _**men**dasar**i**_ 'to underlie sth.', and _**men**dasar**kan**_ 'to base sth. on' that are all derived from the nominal root *dasar* 'base; foundation'. 
+
+The following codes show the filtering processes to retrieve the relevant verbs and [Table \@ref(tab:studied-verbs-retrieval)](#studied-verbs-retrieval) shows the snippet of the database.
+
+```{r studied-verbs-retrieval}
+# load the database
+parsed_me_noun <- readRDS("data/me_parsed_nountaggedbase.rds")
+
+# filtering parameters
+min_freq <- 20 # freq. threshold
+base_type <- "noun" # root category
+
+# filtering process
+df_noun <- parsed_me_noun %>% 
+  filter(n > min_freq) %>% # retrieve only verbs occurring over 20 tokens
+  group_by(base) %>% 
+  mutate(n_affix_new = n_distinct(affix)) %>% 
+  filter(n_affix_new == 3) %>% # make sure each root occurs in the 3 schemas
+  ungroup()
+
+# retrieve the target-word character vectors
+me_words <- df_noun$word 
+
+
+# print the database snippet
+df_noun %>%
+  select(-n_affix_new) %>% 
+  filter(base %in% c("dasar")) %>% 
+  rename(base_pos = base.pos,
+         token_freq = n) %>% 
+  mutate(word = paste("*", word, "*", sep = ""),
+         base = paste("*", base, "*", sep = ""),
+         affix = paste("*", affix, "*", sep = ""),
+         morphind = gsub("(<|>)", "\\\\\\1", morphind, perl = TRUE)) %>% 
+  knitr::kable(caption = "Snippet of the analysed denominal verbs")
+```
+
+In total, we analysed `r length(me_words)` denominal verbs based on `r length(unique(df_noun$base))` root types occurring in three morphological schemas.
+
+We mention in the paper about checking the existence of the studied verbs with *MALINDO Morph*, a morphological dictionary for Indonesian and Malay [@nomoto_malindo_2018]. We checked it with the latest version of MALINDO Morph from the file named `"malindo_dic_20181125.tsv"` that has been saved as `"malindo_dbase.rds"` (an R type of data) and tab-delimited `.csv` file (`"malindo_dbase.csv"`). The following codes document the checking processes. The printed verbs are those absent from *MALINDO Morph* but available in our corpus occurring over 20 tokens overall.
+
+```{r malindo-check}
+# load MALINDO Dictionary data
+malindo <- readRDS("data/malindo_dbase.rds")
+
+# print the verbs that are available in the dataset but absent in MALINDO
+(absent_in_malindo <- setdiff(me_words, malindo$word_form))
+```
+
+As *MALINDO Morph* is also based on the Leipzig Corpora, it only takes into account words occurring over ten tokens in all the 300K-sentences version of the corpus [@nomoto_malindo_2018]. Our frequency check of these absent verbs confirms that they all occur less than ten tokens in the 300K-sentence files that we use. The following codes show these information.
+
+```{r malindo-freq-check, message = FALSE, warning = FALSE}
+# load the freqlist per corpus and 
+# check freq. of words absent in MALINDO 300K corpus
+df_all_pref <- read_tsv("data/wordlist_leipzig_ME_DI_TER_percorpus.tsv", progress = FALSE)
+df_all_pref %>% 
+  filter(word %in% absent_in_malindo,
+         grepl("300K", corpus, perl = TRUE)) %>% 
+  mutate(word = paste("*", word, "*", sep = "")) %>% 
+  arrange(word, corpus) %>% 
+  knitr::kable(row.names = TRUE, caption = 'Token frequency of the absent verbs in the 300K-sentence files')
+```
+
+## Load the vector space models for the Indonesian Leipzig Corpora
+
+Detailed information concerning the training parameters is available in our paper. In short, we trained the Leipzig Corpora on the [*MonARCH HPC*](https://confluence.apps.monash.edu/display/monarch/MonARCH+Home) using the *skip-gram* learning algorithm from the *word2vec* model [@mikolov_efficient_2013; @mikolov_distributed_2013; @mikolov_linguistic_2013] via the wordVectors R package [@schmidt_wordvectors_2017]. The output model is available as .bin file named `"leipzig_w2v_vector_full.bin"`. The following codes show how the model is loaded into R using `read.binary.vectors()` from wordVectors package.
+
+```{r load-model-show, message = FALSE, warning = FALSE, error = FALSE, include = TRUE, eval = FALSE}
+vsm <- read.binary.vectors("data/leipzig_w2v_vector_full.bin")
+```
+
+
+```{r load-model-eval, include = FALSE}
+vsm <- read.binary.vectors("data/leipzig_w2v_vector_full.bin")
+```
+
+
+To retrieve the vector space model (VSM) of the target denominal verbs, use the following codes.
+
+```{r vsm-denominal}
+# get the VSM for the studied denominal verbs
+vsm_tgt <- vsm[rownames(vsm) %in% me_words, ] 
+
+# print the subset of the model
+vsm_tgt 
+```
+
+# Results and discussion
+
+The following codes run the _Hierarchical Agglomerative Analysis_ (HAC) on the target verbs vector space model as well as the _Average Silhouette Width_ (ASW) statistics.
+
+```{r hac-analysis}
+# A wrapper function for HCA and ASW computations and gathering the relevant results
+svs_hca <- function(vect = NULL, 
+                    clust_method = c("complete", "ward.D", "ward.D2", 
+                                     "single", "average", "mcquitty", 
+                                     "median", "centroid")) {
+  
+  # 1 cosine distance using function from `wordVectors`
+  cosdist <- wordVectors::cosineDist(vect, vect)
+  cosdist <- as.dist(cosdist)
+  
+  # 2 Hierarchical Cluster Analysis
+  hca <- hclust(cosdist, method = clust_method)
+  
+  # 3 Compute the 'average silhouette width' (ASW) 
+  #   using the 'cutree' function for HCA partitioning
+  asw_f <- function(x) {
+    summary(cluster::silhouette(stats::cutree(hca, k = x), cosdist))$avg.width
+  }
+  asw_cutree <- sapply(2:(dim(vect)[1] - 1), asw_f)
+  names(asw_cutree) <- 2:(dim(vect)[1] - 1)
+  
+  # 3.2 get the cluster number with highest ASW score
+  n_cluster <- as.numeric(names(asw_cutree[asw_cutree == max(asw_cutree)]))
+  max_asw <- asw_cutree[asw_cutree == max(asw_cutree)]
+  
+  # 4 Put the results into a list
+  res <- list(cosdist, hca, n_cluster, max_asw, asw_cutree)
+  names(res) <- c("cosine_dist", "hcluster", "n_cluster", "asw", "asw_all")
+  return(res)
+}
+
+# Hierarchical Agglomerative Cluster (HAC) analysis for the denominal verbs
+clust_method <- "ward.D2"
+hca_res <- svs_hca(vect = vsm_tgt,
+                   clust_method = clust_method)
+```
+
+The following codes generate the plot for the ASW scores in the paper.
+
+```{r hca-asw-plot, fig.asp = .9, fig.width = 6.25, fig.cap = "Average Silhouette Widths for the tested cluster solutions."}
+
+# preparing data frame for the ASW and tested clusters
+asw_df <- hca_res$asw_all
+asw_df <- tibble::tibble(tested_cluster = names(asw_df),
+                         asw = unname(asw_df))
+asw_df_sort <- dplyr::arrange(asw_df, dplyr::desc(asw))
+
+# plot with ggplot2
+asw_df_sort %>% 
+  ggplot(aes(x = reorder(tested_cluster, asw), y = asw, group = 1)) +
+  geom_step() +
+  ylim(c(0, 1)) +
+  coord_flip() +
+  theme_light() +
+  geom_text(aes(label = round(asw, 3)), hjust = -0.2, size = 2.5) +
+  labs(x = "Number of tested cluster solutions",
+       y = "Average Silhouette Width (ASW)",
+       caption = paste("The tested cluster solution ranges from 2 to ", 
+                       length(me_words) - 1, 
+                       " (i.e., the length of the analysed words (", 
+                       length(me_words), ") - 1).\nThe highest ASW of ", 
+                       round(hca_res$asw, 3), 
+                       " is for ", hca_res$n_cluster, 
+                       "-cluster solution", 
+                       sep = ""))
+
+```
+
+The dendrogram tree is generated using the following codes:
+
+```{r hca-plot, fig.asp = 1.3, fig.cap = "Cluster dendrogram for the studied denominal verbs based on *Hierarchical Agglomerative Clustering* (Distance measure = *Cosine Distance*; Clustering method = *Ward.D2*); The 21-cluster solution is based on the highest ASW score of 0.304 and is indicated by the red boxes."}
+opar <- par(no.readonly = TRUE)
+par(mar = c(2, 2, 2, 10))
+dend <- as.dendrogram(hca_res$hcluster)
+dend <- dendextend::set(dend = dend, "labels_cex", .9)
+plot(dend, horiz = TRUE)
+dendextend::rect.dendrogram(dend,
+                            k = hca_res$n_cluster,
+                            horiz = TRUE,
+                            border = 2,
+                            lwd = 0.35)
+par(opar)
+```
+
+```{r get-word-frequency}
+# A function to retrieve the token frequency of the studied verbs
+wfreq <- function(df = df_noun, w, formatted = TRUE) {
+  freq <- dplyr::pull(dplyr::filter(df, word == w), n)
+  if (formatted) {
+    freq <- format(freq, big.mark = ",")
+  } 
+  return(freq)
+}
+```
+
+
+## Semantic cluster {#semclust}
+
+The subcluster of the <span style = "font-variant:small-caps;">motion</span> verbs is extracted using the following codes:
+
+```{r subclust-motion, fig.cap = 'Cluster for the <span style = "font-variant:small-caps;">motion</span> verbs'}
+clusters <- dendextend::cutree(hca_res$hcluster, k = hca_res$n_cluster)
+opar <- par(no.readonly = TRUE)
+par(mar = c(2, 2, 2, 7))
+dend <- as.dendrogram(hca_res$hcluster)
+to_prune <- names(clusters[!names(clusters) %in% c("melangkahkan", "melangkah", "menapak", "menapaki", "menapakkan", "menjejakkan", "menjejak", "menjejaki")])
+plot(dendextend::prune(dend, to_prune), horiz = TRUE)
+par(opar)
+```
+
+In this section, we present three tables for n-grams data of verbs with the root *tapak* 'sole of the foot'. The data can be loaded as follows:
+
+```{r tapak-gram, message = FALSE, warning = FALSE}
+tapak <- readr::read_tsv("data/ngramexampl_3gr_menapak.txt")
+tapaki <- readr::read_tsv("data/ngramexampl_3gr_menapaki.txt")
+tapakkan <- readr::read_tsv("data/ngramexampl_3gr_menapakkan.txt")
+```
+
+The following codes generate the ten most frequent right-side 3-gram for *menapak*.
+
+```{r tapak-gram-table}
+tapakgr <- tapak %>%
+  filter(w1 == "menapak") %>% 
+  count(ngrams, sort = TRUE) %>% 
+  .[1:10, ] %>% 
+  mutate(ngrams = paste("*", ngrams, "*", sep = "")) # make ngrams italics
+knitr::kable(tapakgr, caption = "The ten most frequent 3-gram for *menapak*", row.names = TRUE)
+```
+
+*Menapak* can be used as transitive (item 1, 5, and 7) and intransitive verbs (the remaining items in [Table \@ref(tab:tapak-gram-table)](#tapak-gram-table)). Its transitive usage shares similar right-side collocation patterns with the *MeN*-/-*i* form *menapaki*, especially their direct object with *masa depan* 'future' and *karir* 'career' ([Table\@ref(tab:tapaki-gram-table) below](#tapaki-gram-table)).
+
+```{r tapaki-gram-table}
+tapakigr <- tapaki %>%
+  filter(w1 == "menapaki") %>% 
+  count(ngrams, sort = TRUE) %>% 
+  .[1:10, ] %>% 
+  mutate(ngrams = paste("*", ngrams, "*", sep = ""))
+knitr::kable(tapakigr, caption = "The ten most frequent 3-gram for *menapaki*", row.names = TRUE)
+```
+
+This is different from the transitive usage with *MeN*-/-*kan* schema ([Table \@ref(tab:tapakkan-gram-table) below](#tapakkan-gram-table)), which predominantly has *kaki* 'foot' as its direct object, followed by either locational/directional prepositional phrses or motion verb complements (e.g., *memasuki* 'to enter' [item 5] and *maju* 'to move forward' [item 8]).
+
+```{r tapakkan-gram-table}
+tapakkangr <- tapakkan %>%
+  filter(w1 == "menapakkan") %>% 
+  count(ngrams, sort = TRUE) %>% 
+  .[1:10, ] %>% 
+  mutate(ngrams = paste("*", ngrams, "*", sep = ""))
+knitr::kable(tapakkangr, caption = "The ten most frequent 3-gram for *menapakkan*", row.names = TRUE)
+```
+
+Codes for extracting the subset of the mixture of <span style = "font-variant:small-caps;">communication</span> and <span style = "font-variant:small-caps;">psych</span> verbs are as follows.
+
+```{r subcluster-psychs-1, fig.cap = 'Cluster of <span style = "font-variant:small-caps;">communication</span> and <span style = "font-variant:small-caps;">psych</span> verbs (a)'}
+clusters <- dendextend::cutree(hca_res$hcluster, k = hca_res$n_cluster)
+opar <- par(no.readonly = TRUE)
+par(mar = c(2, 2, 2, 7))
+dend <- as.dendrogram(hca_res$hcluster)
+to_prune <- names(clusters[!names(clusters) %in% c("membayangkan", "menyesal", "menyesali", "mengatai")])
+plot(dendextend::prune(dend, to_prune), horiz = TRUE)
+par(opar)
+```
+
+The above dendrogram is from the top cluster in [Figure \@ref(fig:hca-plot)](#hca-plot), consisting of (i) *menyesal* 'to be regretful' (N = `r wfreq(df_noun, "menyesal")`), (ii) *menyesali* 'regret sth.' (N = `r wfreq(df_noun, "menyesali")`), and (iii) *membayangkan* 'imagine; visualise' (N = `r wfreq(df_noun, "membayangkan")`). The other subset of <span style = "font-variant:small-caps;">communication</span> and <span style = "font-variant:small-caps;">psych</span> verbs (i.e., *mengatakan* 'to say sth.' (N = `r wfreq(df_noun, "mengatakan")`), *mencontohkan* 'to exemplify' (N = `r wfreq(df_noun, "mencontohkan")`), and *menyesalkan* 'regret sth.' (N = `r wfreq(df_noun, "menyesalkan")`)) is extracted as follows.
+
+```{r subcluster-psychs-2, fig.cap = 'Cluster of <span style = "font-variant:small-caps;">communication</span> and <span style = "font-variant:small-caps;">psych</span> verbs (b)'}
+clusters <- dendextend::cutree(hca_res$hcluster, k = hca_res$n_cluster)
+opar <- par(no.readonly = TRUE)
+par(mar = c(2, 2, 2, 7))
+dend <- as.dendrogram(hca_res$hcluster)
+to_prune <- names(clusters[!names(clusters) %in% c("mencontohkan", "mengatakan", "menyesalkan")])
+plot(dendextend::prune(dend, to_prune), horiz = TRUE)
+par(opar)
+```
+
+What interesting between verbs in these last two clusters is that the *MeN*-/-*i* (i.e. *mengatai*) and *MeN*-/-*kan* verbs (i.e. *mengatakan*) with the root *kata* 'word' are way apart in the dendrogram. Similar case is apparent between *menyesalkan* separated with *menyesal* and *menyesali*, where the latter two verbs cluster together and are merged first in [Figure \@ref(fig:subcluster-psychs-1)](#subcluster-psychs-1) (see §[\@ref(cluster-split)](#cluster-split) for further discussion on this split).
+
+## Root-based clustering {#root-cluster}
+
+This cluster type captures denominal verbs of a given root with the three different morphological schemas that cluster together ([Figure \@ref(fig:subcluster-root-based)](#subcluster-root-based)). We have seen few examples of these in the <span style = "font-variant:small-caps;">motion</span> cluster with the root *tapak* 'sole of the foot' and *jejak* 'footprint', the derived forms of which fall into one cluster but differ in terms of their within-cluster branching ([Figure \@ref(fig:subclust-motion)](#subclust-motion)). The other examples are based on the following roots:
+
+a. *susu* 'milk' -> *menyusu* '(of a baby/young animal) to suckle' (N = `r wfreq(df_noun, "menyusu")`); *menyusui* 'to breast-feed sb.' (N = `r wfreq(df_noun, "menyusui")`); *menyusukan* 'to let sb. suckle; to breast-feed sb.' (N = `r wfreq(df_noun, "menyusukan")`)
+b. *dasar* 'base' -> *mendasar* 'basic; foundational' (N = `r wfreq(df_noun, "mendasar")`); *mendasari* 'to underlie sth.' (N = `r wfreq(df_noun, "mendasari")`); *mendasarkan* 'to base X (on Y)' (N = `r wfreq(df_noun, "mendasarkan")`)
+c. *tempat* 'place; location' -> *menempat* 'to place/position (sth.) at' (N = `r wfreq(df_noun, "menempat")`); *menempati* 'to occupy; to site at' (N = `r wfreq(df_noun, "menempati")`); *menempatkan* 'to put/place/position X at Y' (N = `r wfreq(df_noun, "menempatkan")`)
+d. *wakil* 'vice; representative; deputy' -> *mewakil* 'to (be a) represent(ative of) X' (N = `r wfreq(df_noun, "mewakil")`); *mewakili* 'to (be a) represent(ative of) X' (N = `r wfreq(df_noun, "mewakili")`); *mewakilkan* 'to assign sb. as a representative' (N = `r wfreq(df_noun, "mewakilkan")`) 
+
+The cluster subsets of these verbs are extracted from [Figure \@ref(fig:hca-plot)](#hca-plot) into [Figure \@ref(fig:subcluster-root-based)](#subcluster-root-based) with the codes below.
+
+```{r subcluster-root-based, fig.cap = 'Root-based clustered denominal verbs'}
+clusters <- dendextend::cutree(hca_res$hcluster, k = hca_res$n_cluster)
+opar <- par(no.readonly = TRUE)
+par(mar = c(2, 2, 2, 7))
+dend <- as.dendrogram(hca_res$hcluster)
+to_prune <- names(clusters[!names(clusters) %in% c("mewakili", "mewakilkan", "mewakil", "menyusu", "menyusui", "menyusukan", "menempati", "menempatkan", "menempat", "mendasari", "mendasarkan", "mendasar")])
+plot(dendextend::prune(dend, to_prune), horiz = TRUE)
+dendextend::rect.dendrogram(dendextend::prune(dend, to_prune),
+                            k = 4,
+                            horiz = TRUE,
+                            border = 2,
+                            lwd = 0.35)
+par(opar)
+```
+
+In the paper, we present n-grams data contrasting *mewakili* and *mewakilkan* in terms of their ride-side collocates in their 3-grams data. First, the codes for generating n-grams for *mewakili* 'to (be a) represent(ative of) X' are shown below.
+
+```{r mewakili-gr, message = FALSE, warning = FALSE, include = TRUE}
+mewakili <- readr::read_tsv("data/ngramexampl_5gr_mewakili.txt", progress = FALSE)
+mewakili_mini <- dplyr::filter(mewakili, w1 == "mewakili")
+mewakili_count <- dplyr::count(mewakili_mini, w1, w2, w3, sort = TRUE)
+mewakili_print <- mewakili_count[1:10,]
+mewakili_print <- dplyr::mutate(mewakili_print, 
+                                ngrams = paste(w1, "_", w2, "_", w3, sep = ""),
+                                ngrams = paste("*", ngrams, "*", sep = ""))
+mewakili_print <- dplyr::select(mewakili_print, ngrams, n)
+knitr::kable(mewakili_print, caption = "10 most frequent 3-gram for *mewakili* 'to (be a) represent(ative of) X'", row.names = TRUE)
+```
+
+Then, the codes for 3-grams of *mewakilkan* 'to make X as the representative (of Y)'.
+
+```{r mewakilkan-gr, message = FALSE, warning = FALSE, include = TRUE}
+mewakilkan <- readr::read_tsv("data/ngramexampl_5gr_mewakilkan.txt", progress = FALSE)
+mewakilkan_mini <- dplyr::filter(mewakilkan, w1 == "mewakilkan")
+mewakilkan_count <- dplyr::count(mewakilkan_mini, w1, w2, w3, sort = TRUE)
+mewakilkan_print <- mewakilkan_count[1:10,]
+mewakilkan_print <- dplyr::mutate(mewakilkan_print, 
+                                ngrams = paste(w1, "_", w2, "_", w3, sep = ""),
+                                ngrams = paste("*", ngrams, "*", sep = ""))
+mewakilkan_print <- dplyr::select(mewakilkan_print, ngrams, n)
+knitr::kable(mewakilkan_print, caption = "10 most frequent 3-gram for *mewakilkan* 'to appoint/select X as the representative of Y'", row.names = TRUE)
+```
+
+## Clustering-split between morphological schemas for a given root {#cluster-split}
+
+
+
+This sub-section addresses in more details split cases between morphological schemas for a given root. The split, especially between *MeN*-/-*kan* and *MeN*-/-*i* verbs, reflects Sneddon et al's [-@sneddon_indonesian_2010, 100-101] hypothesis concerning clear semantic difference between some of a pair of *MeN*-/-*kan* and *MeN*-/-*i* verbs with the same root. Our VSM-based approach allows us to *visualise* such split through the dendrogram based on large-scale usage data. The sub-section also demonstrates further enrichment in charactersing the difference between morphologically related verb pairs using the technique of _nearest neighbours_ based on the VSM data.
+
+In §[\@ref(semclust)](#semclust), we have mentioned the clear split between the transitive *melangkahkan* 'to move the foot forward' and *melangkahi* 'to step over'. Looking at the 2-gram data for each verb shows that they have different semantic orientation. The following codes generate the 2-gram data for *melangkahi*.
+
+```{r langkahi-gr, message = FALSE, warning = FALSE, include = TRUE}
+langkahi <- readr::read_tsv("data/ngramexampl_3gr_melangkahi.txt")
+langkahi_print <- langkahi %>% 
+  filter(w1 == "melangkahi") %>% 
+  mutate(ngrams = paste(w1, "_", w2, sep = ""),
+         ngrams = paste("*", ngrams, "*", sep = "")) %>% 
+  count(ngrams, sort = TRUE) %>% 
+  .[1:10, ]
+knitr::kable(langkahi_print, caption = "Ten most frequent 2-gram for right-side collocates of *melangkahi*", row.names = TRUE)
+```
+
+*Melangkahi* predominantly conveys metaphorical sense related to disobeying/disregarding certain (i) rules/protocols (i.e., *aturan*, *batas-batas*/*batasan* 'limits; restriction', *mekanisme* 'mechanism'), (ii) foundation (*dasar-dasar*), or (iii) authority (*kewenangan*).
+
+In contrast, *melangkahkan* predominantly collocates with *kaki* 'foot' as its direct object collocates, which can be used in the literal, translational motion and metaphorical motion (see our paper for the example sentences).
+
+```{r langkahkan-gr, message = FALSE, warning = FALSE, include = TRUE}
+langkahkan <- readr::read_tsv("data/ngramexampl_3gr_melangkahkan.txt")
+langkahkan_print <- langkahkan %>% 
+  filter(w1 == "melangkahkan") %>% 
+  mutate(ngrams = paste(w1, "_", w2, sep = ""),
+         ngrams = paste("*", ngrams, "*", sep = "")) %>% 
+  count(ngrams, sort = TRUE) %>% 
+  .[1:10, ]
+knitr::kable(langkahkan_print, caption = "Ten most frequent 2-gram for right-side collocates of *melangkahkan*", row.names = TRUE)
+```
+
+Observation on the n-gram can be enriched using information from the VSM of words. Given that the *skip-gram* algorithm of *word2vec* learns to predict the contextual environments given a target word [cf. @mikolov_efficient_2013], one can retrieve from the VSM a set of words that have similar contextual-vector distribution to a given target verb on the basis their cosine similarities; these words can be metaphorically referred to as the verb's *nearest neighbours*. [Table \@ref(tab:nearest-to-melangkahi)](#nearest-to-melangkahi) illustrates the idea for *melangkahi* 'to step over'.
+
+```{r nearest-to-melangkahi}
+# function to retrieve and print top-10 nearest neighbours
+neighbours <- function(model, seed_word, n = 10) {
+  topn <- n + 1
+  df <- wordVectors::closest_to(model, seed_word, topn)
+  
+  # remove the seed words because it is similar to itself and become the first nearest word. We thus count top-10 nearest neighbours from the rank 2 to 11
+  df <- dplyr::filter(df, word != seed_word) 
+  df <- dplyr::mutate(df, word = paste("*", word, "*", sep = ""))
+  df <- as.data.frame(df)
+  colnames(df)[2] <- paste('similarity to "*', seed_word, '*"', sep = "")
+  return(df)
+}
+
+# get the nearest neighbours for *melangkahi*
+near_langkahi <- neighbours(vsm, seed_word = "melangkahi")
+knitr::kable(near_langkahi, 
+             caption = "10 closest words to *melangkahi* 'to step over'",
+             row.names = TRUE)
+```
+
+The closest words may not necessarily similar in meaning (e.g., near-synonyms), but may exhibit different kind of relationships, such as antonyms. Words in [Table \@ref(tab:nearest-to-melangkahi)](#nearest-to-melangkahi) conveying more or less antonymous sense to *melangkahi* 'to step over; to disregard' include *mengacuhkan* 'to care about/heed sth.', *mematuhi* 'to obey', and (to a degree) *memperhitungkannya* 'to take sth. into account'. *Mengangkangi* 'to straddle sth.' is the closest in meaning with *melangkahi* as it can be extended into 'disregarding' sense from its physical, posture sense: the 2-gram data for *mengangkangi* across the whole corpus ([Table \@ref(tab:kangkangi-gr)](#kangkangi-gr)) reveals that it does co-occur with rules-related direct objects, such as *hukum* 'law' (3 tokens), *peraturan* 'regulation' (3), *kebenaran* 'the truth' (2), *prinsip* 'principles' (2), *undang-undang* 'constitution' (2), *aturan* 'rules' (1), *inter alia*.
+
+```{r kangkangi-gr, message = FALSE, warning = FALSE, include = TRUE}
+ngangkangi <- readr::read_tsv("data/ngramexampl_3gr_mengangkangi.txt")
+ngangkangi_print <- ngangkangi %>% 
+  filter(w1 == "mengangkangi") %>% 
+  mutate(ngrams = paste(w1, "_", w2, sep = ""),
+         ngrams = paste("*", ngrams, "*", sep = "")) %>% 
+  count(ngrams, sort = TRUE)
+knitr::kable(ngangkangi_print[ngangkangi_print$n > 1, ], caption = "The 2-gram data for right-side collocates of *mengangkangi* (n >= 2)", row.names = TRUE)
+```
+
+The following codes retrieve words nearest to *melangkahkan*.
+
+```{r nearest-to-melangkahkan}
+knitr::kable(neighbours(vsm, "melangkahkan", n = 10), caption = "Ten closest words to *melangkahkan*", row.names = TRUE)
+```
+
+The codes to retrieve the nearest words of *mengatai* 'to rebuke; speake of one's badness'.
+
+```{r nearest-to-mengatai}
+knitr::kable(neighbours(vsm, "mengatai", n = 10), caption = "Ten closest words to *mengatai*", row.names = TRUE)
+```
+
+In contrast, *mengatakan* mostly appears as communication verb with similar distribution with other reported speech verbs.
+
+```{r nearest-to-mengatakan}
+knitr::kable(neighbours(vsm, "mengatakan", n = 10), caption = "Ten closest words to *mengatakan*", row.names = TRUE)
+```
+
+Nearest words to *membuahi* 'to breed sth.' are retrieved as follows.
+
+```{r nearest-to-membuahi}
+knitr::kable(neighbours(vsm, "membuahi", n = 10), caption = "Ten closest words to *membuahi*", row.names = TRUE)
+```
+
+Codes for extracting closest words to *membuahkan* 'to bear a fruit; to result in sth.'.
+
+```{r nearest-to-membuahkan}
+knitr::kable(neighbours(vsm, "membuahkan", n = 10), caption = "Ten closest words to *membuahkan*", row.names = TRUE)
+```
+
+Notes on the usage sentences for *membuah* are below. But first load the sentence citations for *membuah* into R and print them into the console. After that the notes are manually created by manually inspecting all the usage sentences. The sentence data is available as `.rds` file of `list` (`sentence_membuah.rds`) and `.txt` file as plain text of sentences (`sentence_membuah.txt`). 
+
+```{r load-membuah-sentence}
+membuah <- readRDS("data/sentence_membuah.rds")
+membuah$ind_mixed_2012_1M # for instance, retrieve sentences found in `ind_mixed_2012_1M-sentences.txt`
+```
+
+The sentence format is `corpus-file-name_sentence-id-number_sentence-citation`. The `<m>...</m>` tag indicates the corresponding match/word/verb.
+
+- *membuah* (56 citations; Summary: analogy to *membuahkan* = 24 citations; split with *-kan* = 1; mispell for *membuat* = 25; mispell for *membuang* = 5; unclear = 1)
+
+    - ind_mixed_2012_1M: 4 citations (all FULL FORM)
+    - ind_news_2008_300K: 5 citations (2 mispell for *membuat* [id 53666 & 155569]; 3 FULL FORM analogy to *membuahkan*)
+    - ind_news_2009_300K: 3 citations (1 mispell for *membuat* [id 200027] 2 FULL FORM analogy to *membuahkan*)
+    - ind_news_2010_300K: 1 citation (all mispell for *membuat*)
+    - ind_news_2011_300K: 2 citations (1 mispell for *membuat* [id 266814]; 1 FULL FORM analogy to *membuahkan*)
+    - ind_news_2012_300K: 5 citations (4 mispell for *membuat* [id 200952, 206980, 268407, 269898]; 1 FULL FORM analogy to *membuahkan*)
+    - ind_newscrawl_2011_1M: 6 citations (3 FULL FORM analogy to *membuahkan*; 3 mispell for *membuat* [id 118419, 151095, 205239])
+    - ind_newscrawl_2012_1M: 3 citations (1 mispell for *membuat* [id 201217]; 1 mispell for *membuang* [id 401158]; 1 got split with *-kan* [id 595662])
+    - ind_web_2011_300K: 1 citation (mispell for *membuat*)
+    - ind_web_2012_1M: 4 citations (1 mispell for *membuat* [id 602274]; 1 unclear for mispell for *membuat* [id 365510]; 2 FULL FORM analogy to *membuahkan*)
+    - ind_wikipedia_2016_1M: 5 citations (2 mispell for *membuat* [id 320981, 596205]; 3 FULL FORM analogy to *membuahkan*)
+    - ind-id_web_2013_1M: 5 citations (1 mispell for *membuang* [id 886076]; 4 FULL FORM as *membuahkan*)
+    - ind-id_web_2015_3M: 12 citations (1 FULL FORM as *membuahkan* [id 1396285]; 3 mispell for *membuang* [id 1362223, 1549653, 1564536], the remaining 8 mispell for *membuat*)
+
+The following codes retrieve the nearest words to *mengakhiri* (N = `r wfreq(df_noun, "mengakhiri")`).
+
+```{r nearest-to-mengakhiri}
+knitr::kable(neighbours(vsm, "mengakhiri", n = 10), caption = "Ten closest words to *mengakhiri*", row.names = TRUE)
+```
+
+If reader wishes to check all usage sentences for *mengakhir* to confirm that it occurs as a full word-form and has similar usage patterns with *meN-*/-*i* form *mengakhiri* (i.e. in transitive constructions), use the following code. It will print all sentences for *mengakhir* into R console.
+
+```{r load-mengakhir-sentence, eval = FALSE}
+mengakhir <- readRDS("data/sentence_mengakhir.rds")
+unlist(unname(mengakhir)) # print all 57 sentences in the console
+```
+
+
+Next, the nearest words to *mengakhirkan* (N = `r wfreq(df_noun, "mengakhirkan")`) are shown below.
+
+```{r nearest-to-mengakhirkan}
+knitr::kable(neighbours(vsm, "mengakhirkan", n = 10), caption = "Ten closest words to *mengakhirkan*", row.names = TRUE)
+```
+
+## Issues and challenges {#issues}
+
+Codes to extract the nearest words to *mengantung* 'to hang' (N = `r wfreq(df_noun, "mengantung")`), which is a misspelling of *menggantung* 'to hang' (with double *g*) (N = `r format(sum(subset(df_all_pref, word == "menggantung")$n), big.mark = ",")`). Nearest words output shows that *mengantung* is indeed the closest word to *menggantung* in their usage co-occurrence.
+
+```{r nearest-to-mengantung}
+knitr::kable(neighbours(vsm, "mengantung", n = 10), caption = "Ten closest words to *mengantung*", row.names = TRUE)
+```
+
+The codes below extract the nearest words for *mengantungkan* (N = `r wfreq(df_noun, "mengantungkan")`), a misspelling for *menggantungkan* 'to hang sth. (onto sth.)' (N = `r format(sum(subset(df_all_pref, word == "menggantungkan")$n), big.mark = ",")`).
+
+```{r nearest-to-mengantungkan}
+knitr::kable(neighbours(vsm, "mengantungkan", n = 10), caption = "Ten closest words to *mengantungkan*", row.names = TRUE)
+```
+
+Then, the nearest words for *mengantungi* (N = `r wfreq(df_noun, "mengantungi")`) which is closest to the common spelling with _mengant**o**ngi_ (N = `r format(sum(subset(df_all_pref, word == "mengantongi")$n), big.mark = ",")`) based on the root *kantong* 'pocket'.
+
+```{r nearest-to-mengantungi}
+knitr::kable(neighbours(vsm, "mengantungi", n = 10), caption = "Ten closest words to *mengantungi*", row.names = TRUE)
+```
+
+Finally, the case where part of the complex word is split. The paper illustrates this with *menanda* which is part of *menandatangani* 'to give signature; to sign' but is written separately with whitespace, thus, *menanda tangani*, where the whitespace got tokenised.
+
+```{r nearest-to-menanda}
+knitr::kable(neighbours(vsm, "menanda", n = 10), caption = "Ten closest words to *menanda*", row.names = TRUE)
+```
+
+
+
+
+
+- *menanda* (N = `r wfreq(w = "menanda")`; Summary: split = 113; intransitive usage = 5; transitive usage analogy = 2; ambiguous = 1)
+
+    - ind_mixed_2012_1M (22 citations: 18 split from *menandatangani*; 4 citations as intransitive with *pada* (138307, 278193, 542191, 754529))
+    - ind_news_2008_300K (1 citation: 1 split from *menandatangani*)
+    - ind_news_2009_300K (2 citations: 2 split from *menandatangani*)
+    - ind_news_2010_300K (2 citations: 2 split from *menandatangani*)
+    - ind_news_2011_300K (3 citations: 3 split from *menandatangani*)
+    - ind_newscrawl_2011_1M (10 citations: 10 split from *menandatangani*)
+    - ind_newscrawl_2012_1M (9 citations: 9 split from *menandatangani*)
+    - ind_web_2011_300K (4 citations: 4 split from *menandatangani*)
+    - ind_web_2012_1M (18 citations):
+        - 14 citations split from *menandatangani*
+        <!-- - 1 citation of reduplication *tanda- menanda* (55270): Ancangan Semiotika dan Pengkajian Susastra adalah buku teori dan kritik sastra yang memumpunkan telaahnya pada masalah ilmu tanda- <m>menanda</m>  dalam hubungannya dengan komunikasi dan pemaknaan sastra ." -->
+        - 1 citation of transitive usage in analogy to *menandai* (44043): "II . mangarus rupa , menerka , mencoba  &lt;m&gt;menanda&lt;&#47;m&gt;  siapa orang ini ."
+        - 1 citation of transitive usage in analogy to *menandakan* 'to mark/signal (the existence of) sth.' (368004): "Majlis tamat , hadir berduyun sekumpulan penari dengan meriahnya ,  &lt;m&gt;menanda&lt;&#47;m&gt;  temasya kecil kampung bakal bermula , sedikit demi sedikit sahutan penduduk kampung menggila sepenuh nafsu menari sekali bersama penari ." (Malaysian Malay?)
+        - 1 citation of intransitive usage (544395): "Bagi aku , kalau tidak sempat  &lt;m&gt;menanda&lt;&#47;m&gt;  di sekolah ( memang tak cukup masa ) , terpaksalah bawa di rumah ." 
+        - 1 citation of ambiguous usage (981384): "Nama dan No Kad Pengenalan disebut , dan mereka  &lt;m&gt;menanda&lt;&#47;m&gt;  ."
+    - ind_wikipedia_2016_1M (16 citations: 16 split from *menandatangan(i)*)
+    - ind-id_web_2013_1M (16 citations: 16 split from *menandatangan(i)*)
+    - ind-id_web_2015_3M (18 citations: 18 split from *menandatangan(i)*)
+
+
+# Session Info {-}
+
+```{r sessinfo}
+devtools::session_info()
+```
+
+
+# References {-}
