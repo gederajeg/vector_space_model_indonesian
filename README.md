@@ -22,18 +22,21 @@ This is a repository containing the source [R
 Markdown](http://rmarkdown.rstudio.com)
 [Notebook](https://bookdown.org/yihui/rmarkdown/notebook.html) (i.e.
 `nusa_r_notebook.Rmd`) for the quantitative analyses accompanying our
-paper on vector space models and Indonesian denominal verbs (accepted
-for publication in
+[paper](http://repository.tufs.ac.jp/handle/10108/94452) (Rajeg,
+Denistia & Musgrave [2019](#ref-rajeg_vector_2019)) on vector space
+models and Indonesian denominal verbs (published open-access in
 [*NUSA*](http://www.aa.tufs.ac.jp/en/publications/nusa)’s special issue
 titled [*Linguistic studies using large annotated
-corpora*](https://malindo.aa-ken.jp/call67.html), edited by [Hiroki
-Nomoto](http://www.tufs.ac.jp/ts/personal/nomoto/) and [David
-Moeljadi](http://compling.hss.ntu.edu.sg/who/david/)). The Notebook,
-however, does not provide detailed exposition and discussion for each
-points. Also, there can be differences in some of the text-narratives in
-the Notebook compared to the published manuscript after revision.
-Readers are referred to our published paper for details. Our
-computational analyses in the R Notebook used the following
+corpora*](http://repository.tufs.ac.jp/handle/10108/94450), edited by
+[Hiroki Nomoto](http://www.tufs.ac.jp/ts/personal/nomoto/) and [David
+Moeljadi](http://compling.hss.ntu.edu.sg/who/david/)) (Nomoto & Moeljadi
+[2019](#ref-nomoto_linguistic_2019)). The Notebook, however, does not
+provide detailed exposition and discussion for each points. Also, there
+can be differences in some of the text-narratives in the Notebook
+compared to the published manuscript after revision. Readers are
+referred to our published
+[paper](http://repository.tufs.ac.jp/handle/10108/94452) for details.
+Our computational analyses in the R Notebook used the following
 [R](https://www.r-project.org) packages, which have to be installed in R
 to run all codes in the
     Notebook:
@@ -145,33 +148,35 @@ macOS.
 
 ``` r
 devtools::session_info()
-#> ─ Session info ──────────────────────────────────────────────────────────
+#> ─ Session info ───────────────────────────────────────────────────────────────
 #>  setting  value                       
-#>  version  R version 3.6.0 (2019-04-26)
-#>  os       macOS Mojave 10.14.6        
+#>  version  R version 3.6.3 (2020-02-29)
+#>  os       macOS Catalina 10.15.3      
 #>  system   x86_64, darwin15.6.0        
 #>  ui       X11                         
 #>  language (EN)                        
 #>  collate  en_US.UTF-8                 
 #>  ctype    en_US.UTF-8                 
 #>  tz       Asia/Makassar               
-#>  date     2019-10-12                  
+#>  date     2020-04-01                  
 #> 
-#> ─ Packages ──────────────────────────────────────────────────────────────
+#> ─ Packages ───────────────────────────────────────────────────────────────────
 #>  package     * version date       lib source        
 #>  assertthat    0.2.1   2019-03-21 [1] CRAN (R 3.6.0)
-#>  backports     1.1.4   2019-04-10 [1] CRAN (R 3.6.0)
+#>  backports     1.1.5   2019-10-02 [1] CRAN (R 3.6.0)
 #>  callr         3.2.0   2019-03-15 [1] CRAN (R 3.6.0)
-#>  cli           1.1.0   2019-03-19 [1] CRAN (R 3.6.0)
+#>  cli           2.0.2   2020-02-28 [1] CRAN (R 3.6.0)
 #>  crayon        1.3.4   2017-09-16 [1] CRAN (R 3.6.0)
 #>  desc          1.2.0   2018-05-01 [1] CRAN (R 3.6.0)
-#>  devtools      2.0.2   2019-04-08 [1] CRAN (R 3.6.0)
-#>  digest        0.6.19  2019-05-20 [1] CRAN (R 3.6.0)
+#>  devtools      2.2.1   2019-09-24 [1] CRAN (R 3.6.0)
+#>  digest        0.6.25  2020-02-23 [1] CRAN (R 3.6.0)
+#>  ellipsis      0.3.0   2019-09-20 [1] CRAN (R 3.6.0)
 #>  evaluate      0.14    2019-05-28 [1] CRAN (R 3.6.0)
+#>  fansi         0.4.1   2020-01-08 [1] CRAN (R 3.6.0)
 #>  fs            1.3.1   2019-05-06 [1] CRAN (R 3.6.0)
-#>  glue          1.3.1   2019-03-12 [1] CRAN (R 3.6.0)
+#>  glue          1.3.2   2020-03-12 [1] CRAN (R 3.6.0)
 #>  htmltools     0.3.6   2017-04-28 [1] CRAN (R 3.6.0)
-#>  knitr         1.23    2019-05-18 [1] CRAN (R 3.6.0)
+#>  knitr         1.28    2020-02-06 [1] CRAN (R 3.6.0)
 #>  magrittr      1.5     2014-11-22 [1] CRAN (R 3.6.0)
 #>  memoise       1.1.0   2017-04-21 [1] CRAN (R 3.6.0)
 #>  pkgbuild      1.0.3   2019-03-20 [1] CRAN (R 3.6.0)
@@ -179,19 +184,19 @@ devtools::session_info()
 #>  prettyunits   1.0.2   2015-07-13 [1] CRAN (R 3.6.0)
 #>  processx      3.3.1   2019-05-08 [1] CRAN (R 3.6.0)
 #>  ps            1.3.0   2018-12-21 [1] CRAN (R 3.6.0)
-#>  R6            2.4.0   2019-02-14 [1] CRAN (R 3.6.0)
-#>  Rcpp          1.0.1   2019-03-17 [1] CRAN (R 3.6.0)
-#>  remotes       2.0.4   2019-04-10 [1] CRAN (R 3.6.0)
-#>  rlang         0.4.0   2019-06-25 [1] CRAN (R 3.6.0)
-#>  rmarkdown     1.13    2019-05-22 [1] CRAN (R 3.6.0)
+#>  R6            2.4.1   2019-11-12 [1] CRAN (R 3.6.0)
+#>  Rcpp          1.0.4   2020-03-17 [1] CRAN (R 3.6.0)
+#>  remotes       2.1.0   2019-06-24 [1] CRAN (R 3.6.0)
+#>  rlang         0.4.5   2020-03-01 [1] CRAN (R 3.6.0)
+#>  rmarkdown     2.1     2020-01-20 [1] CRAN (R 3.6.0)
 #>  rprojroot     1.3-2   2018-01-03 [1] CRAN (R 3.6.0)
 #>  sessioninfo   1.1.1   2018-11-05 [1] CRAN (R 3.6.0)
-#>  stringi       1.4.3   2019-03-12 [1] CRAN (R 3.6.0)
+#>  stringi       1.4.6   2020-02-17 [1] CRAN (R 3.6.0)
 #>  stringr       1.4.0   2019-02-10 [1] CRAN (R 3.6.0)
-#>  testthat      2.1.1   2019-04-23 [1] CRAN (R 3.6.0)
-#>  usethis       1.5.0   2019-04-07 [1] CRAN (R 3.6.0)
+#>  testthat      2.3.1   2019-12-01 [1] CRAN (R 3.6.0)
+#>  usethis       1.5.1   2019-07-04 [1] CRAN (R 3.6.0)
 #>  withr         2.1.2   2018-03-15 [1] CRAN (R 3.6.0)
-#>  xfun          0.8     2019-06-25 [1] CRAN (R 3.6.0)
+#>  xfun          0.12    2020-01-13 [1] CRAN (R 3.6.0)
 #>  yaml          2.2.0   2018-07-25 [1] CRAN (R 3.6.0)
 #> 
 #> [1] /Users/Primahadi/Rlibs
@@ -235,6 +240,26 @@ Hornik. 2018. *Cluster: Cluster Analysis Basics and Extensions*.
 
 Müller, Kirill & Hadley Wickham. 2019. *Tibble: Simple data frames*.
 <https://CRAN.R-project.org/package=tibble>.
+
+</div>
+
+<div id="ref-nomoto_linguistic_2019">
+
+Nomoto, Hiroki & David Moeljadi. 2019. Linguistic studies using large
+annotated corpora: Introduction. (Ed.) Hiroki Nomoto & David Moeljadi.
+*NUSA* 67. (Linguistic Studies Using Large Annotated Corpora). 1–6.
+<http://repository.tufs.ac.jp/handle/10108/94450> (1 April, 2020).
+
+</div>
+
+<div id="ref-rajeg_vector_2019">
+
+Rajeg, Gede Primahadi Wijaya, Karlina Denistia & Simon Musgrave. 2019.
+Vector space models and the usage patterns of indonesian denominal
+verbs: A case study of verbs with meN-, meN-/-kan, and meN-/-i affixes.
+(Ed.) Hiroki Nomoto & David Moeljadi. *NUSA* 67. (Linguistic Studies
+Using Large Annotated Corpora). 35–76.
+<http://repository.tufs.ac.jp/handle/10108/94452> (1 April, 2020).
 
 </div>
 
